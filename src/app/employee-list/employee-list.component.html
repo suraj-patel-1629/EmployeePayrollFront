@@ -1,0 +1,56 @@
+<div class="container mt-4 employee-container">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3 py-3 employee-header">
+        <h3 class="mb-0 fw-bold employee-title text-primary">
+            Employee Details
+        </h3>
+
+        <div class="d-flex align-items-center">
+            <input type="text" class="form-control form-control-sm me-2 employee-search" 
+                   placeholder="🔍 Search Employee" [(ngModel)]="searchText">
+            <button class="btn btn-primary btn-sm d-flex align-items-center employee-add-btn" 
+                    (click)="goToAddEmployee()"> 
+                <i class="bi bi-person-plus-fill me-1"></i> Add Employee
+            </button>
+        </div>
+    </div>
+
+    <!-- Employee Table -->
+    <div class="table-responsive rounded shadow-sm bg-white p-3">
+        <table class="table table-hover align-middle text-center employee-table">
+            <thead class="bg-primary text-white">
+                <tr>
+                    <th>NAME</th>
+                    <th>GENDER</th>
+                    <th>DEPARTMENT</th>
+                    <th>SALARY</th>
+                    <th>START DATE</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of filteredEmployees()" class="employee-row">
+                    <td class="d-flex align-items-center">
+                        <img [src]="employee.profilePic" class="rounded-circle me-2 employee-img" width="40" height="40" /> 
+                        <span class="fw-semibold">{{ employee.name }}</span>
+                    </td>
+                    <td>{{ employee.gender }}</td>
+                    <td>
+                        <span class="badge bg-light text-success border border-success me-1 department-badge" 
+                              *ngFor="let dept of employee.department">
+                            {{ dept }}
+                        </span>
+                    </td>
+                    <td class="fw-bold text-success">₹{{ employee.salary }}</td>
+                    <td>{{ employee.startDate }}</td>
+                    <td>
+                        <i class="bi bi-pencil-square text-warning fs-5 me-3 edit-icon" role="button" 
+                           [routerLink]="['/edit', employee.id]"></i>
+                        <i class="bi bi-trash-fill text-danger fs-5 delete-icon" role="button" 
+                           (click)="deleteEmployee(employee.id)"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

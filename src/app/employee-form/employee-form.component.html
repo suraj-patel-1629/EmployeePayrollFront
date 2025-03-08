@@ -1,0 +1,88 @@
+<div class="container mt-4">
+    <div class="card shadow-lg employee-form-card">
+        <div class="card-header bg-primary text-white text-center">
+            <h3>{{ employeeId ? 'Update Employee' : 'Add Employee' }}</h3>
+        </div>
+        <div class="card-body">
+            <form (ngSubmit)="saveEmployee()">
+                
+                <!-- Name -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Full Name</label>
+                    <input type="text" class="form-control" [(ngModel)]="employee.name" name="name" placeholder="Enter full name" required>
+                </div>
+
+                <!-- Profile Image Selection -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Profile Picture</label>
+                    <div class="d-flex flex-wrap gap-3">
+                        <label *ngFor="let pic of ['assets/1.jpeg', 'assets/2.png', 'assets/2.jpeg']" class="profile-label">
+                            <input type="radio" name="profilePic" [(ngModel)]="employee.profilePic" [value]="pic" hidden>
+                            <img [src]="pic" class="profile-pic rounded-circle" [class.selected]="employee.profilePic === pic">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Gender Selection -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Gender</label>
+                    <div class="d-flex gap-3">
+                        <button type="button" class="btn gender-btn" [class.selected]="employee.gender === 'Male'" (click)="employee.gender = 'Male'">Male</button>
+                        <button type="button" class="btn gender-btn" [class.selected]="employee.gender === 'Female'" (click)="employee.gender = 'Female'">Female</button>
+                    </div>
+                </div>
+
+                <!-- Department Selection -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Department</label>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button *ngFor="let dept of ['HR', 'Sales', 'Finance', 'Engineer', 'Others']" 
+                            type="button" class="btn department-btn" 
+                            [class.selected]="employee.department.includes(dept)"
+                            (click)="toggleDepartment(dept)">
+                            {{ dept }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Salary -->
+               <div class="mb-3">
+    <label class="form-label fw-bold">Salary (Min: ₹500)</label>
+    <div class="input-group">
+        <span class="input-group-text">₹</span>
+        <input type="number" class="form-control" [(ngModel)]="employee.salary" name="salary" 
+               min="500" required placeholder="Enter Salary (₹500 and above)">
+        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+            Select Salary
+        </button>
+        <ul class="dropdown-menu">
+            <li *ngFor="let amount of [30000, 40000, 50000, 60000, 70000, 80000]">
+                <a class="dropdown-item" (click)="setSalary(amount)">₹{{ amount }}</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+                <!-- Start Date -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Start Date</label>
+                    <input type="date" class="form-control" [(ngModel)]="employee.startDate" name="startDate" required>
+                </div>
+
+                <!-- Notes -->
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Notes</label>
+                    <textarea class="form-control" [(ngModel)]="employee.note" name="note" placeholder="Any additional notes..."></textarea>
+                </div>
+
+                <!-- Buttons -->
+                <div class="d-flex justify-content-center mt-4">
+                    <button type="submit" class="btn btn-success btn-lg me-3">{{ employeeId ? 'Update' : 'Submit' }}</button>
+                    <a class="btn btn-danger btn-lg" routerLink="/">Cancel</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,33 @@
+.employee-header {
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 10px;
+}
+
+.employee-search {
+    width: 250px;
+    border-radius: 20px;
+    padding: 5px 10px;
+}
+
+.employee-add-btn {
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+.employee-table thead {
+    background: #007bff;
+    color: white;
+}
+
+.employee-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.employee-img {
+    border: 2px solid #007bff;
+    padding: 2px;
+}
+
+.edit-icon:hover, .delete-icon:hover {
+    opacity: 0.7;
+}
